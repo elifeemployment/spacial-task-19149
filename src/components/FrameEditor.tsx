@@ -65,17 +65,26 @@ export const FrameEditor = ({ photoFile, onBack }: FrameEditorProps) => {
         // Load frame from database
         const frame = await loadImage(frameUrl);
 
-        // Draw user photo (fit to square)
-        const scale = Math.max(size / userPhoto.width, size / userPhoto.height);
-        const x = (size - userPhoto.width * scale) / 2;
-        const y = (size - userPhoto.height * scale) / 2;
+        // Calculate photo area (assuming frame has border, photo fits in center)
+        // Adjust these values based on your frame design
+        const photoAreaSize = size * 0.85; // Photo takes 85% of canvas
+        const photoOffset = (size - photoAreaSize) / 2; // Center the photo area
+        
+        // Scale photo to fit within the photo area
+        const scale = Math.max(photoAreaSize / userPhoto.width, photoAreaSize / userPhoto.height);
+        const scaledWidth = userPhoto.width * scale;
+        const scaledHeight = userPhoto.height * scale;
+        
+        // Center the photo within the photo area
+        const photoX = photoOffset + (photoAreaSize - scaledWidth) / 2;
+        const photoY = photoOffset + (photoAreaSize - scaledHeight) / 2;
         
         ctx.drawImage(
           userPhoto,
-          x,
-          y,
-          userPhoto.width * scale,
-          userPhoto.height * scale
+          photoX,
+          photoY,
+          scaledWidth,
+          scaledHeight
         );
 
         // Draw frame on top
