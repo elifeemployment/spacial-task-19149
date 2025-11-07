@@ -1,12 +1,63 @@
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-campaign.png";
+import { useCountUp } from "@/hooks/useCountUp";
+import { supabase } from "@/integrations/supabase/client";
+import { useEffect, useState } from "react";
 
 interface HeroProps {
   onGetStarted: () => void;
 }
 
 export const Hero = ({ onGetStarted }: HeroProps) => {
+  const [totalDownloads, setTotalDownloads] = useState(0);
+  const [totalShares, setTotalShares] = useState(0);
+  
+  const animatedDownloads = useCountUp(totalDownloads);
+  const animatedShares = useCountUp(totalShares);
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      const { count: downloads } = await supabase
+        .from("user_actions")
+        .select("*", { count: "exact", head: true })
+        .eq("action_type", "download");
+      
+      const { count: shares } = await supabase
+        .from("user_actions")
+        .select("*", { count: "exact", head: true })
+        .eq("action_type", "share");
+
+      setTotalDownloads(downloads || 0);
+      setTotalShares(shares || 0);
+    };
+
+    fetchStats();
+
+    // Subscribe to real-time updates
+    const channel = supabase
+      .channel("stats-updates")
+      .on(
+        "postgres_changes",
+        {
+          event: "INSERT",
+          schema: "public",
+          table: "user_actions",
+        },
+        (payload) => {
+          if (payload.new.action_type === "download") {
+            setTotalDownloads((prev) => prev + 1);
+          } else if (payload.new.action_type === "share") {
+            setTotalShares((prev) => prev + 1);
+          }
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, []);
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
       {/* Background gradient */}
@@ -48,13 +99,13 @@ export const Hero = ({ onGetStarted }: HeroProps) => {
             
             <div className="flex items-center gap-8 justify-center lg:justify-start text-primary-foreground/80">
               <div>
-                <div className="text-3xl font-bold">10K+</div>
-                <div className="text-sm">പിന്തുണക്കാർ</div>
+                <div className="text-3xl font-bold">{animatedDownloads.toLocaleString()}+</div>
+                <div className="text-sm">ഡൗൺലോഡുകൾ</div>
               </div>
               <div className="h-12 w-px bg-primary-foreground/20" />
               <div>
-                <div className="text-3xl font-bold">50K+</div>
-                <div className="text-sm">ഫോട്ടോകൾ പങ്കിട്ടു</div>
+                <div className="text-3xl font-bold">{animatedShares.toLocaleString()}+</div>
+                <div className="text-sm">പങ്കിട്ടു</div>
               </div>
             </div>
           </div>

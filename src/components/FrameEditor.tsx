@@ -119,10 +119,10 @@ export const FrameEditor = ({ photoFile, onBack }: FrameEditorProps) => {
     });
   };
 
-  const handleDownload = () => {
+  const handleDownload = async () => {
     if (!canvasRef.current) return;
 
-    canvasRef.current.toBlob((blob) => {
+    canvasRef.current.toBlob(async (blob) => {
       if (blob) {
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
@@ -130,17 +130,28 @@ export const FrameEditor = ({ photoFile, onBack }: FrameEditorProps) => {
         a.download = `campaign-photo-${Date.now()}.png`;
         a.click();
         URL.revokeObjectURL(url);
+        
+        // Track download
+        await supabase.from("user_actions").insert({
+          action_type: "download",
+        });
+        
         toast.success("Photo downloaded!");
       }
     }, "image/png");
   };
 
-  const handleWhatsAppShare = () => {
+  const handleWhatsAppShare = async () => {
     if (!canvasRef.current) return;
 
-    canvasRef.current.toBlob((blob) => {
+    canvasRef.current.toBlob(async (blob) => {
       if (blob) {
         const file = new File([blob], "campaign-photo.png", { type: "image/png" });
+        
+        // Track share
+        await supabase.from("user_actions").insert({
+          action_type: "share",
+        });
         
         if (navigator.share) {
           navigator.share({
