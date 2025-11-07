@@ -5,18 +5,18 @@ export const HowItWorks = () => {
   const steps = [
     {
       icon: Upload,
-      title: "Upload Photo",
-      description: "Choose your best profile picture from your device",
+      title: "ഫോട്ടോ അപ്‌ലോഡ് ചെയ്യുക",
+      description: "നിങ്ങളുടെ ഉപകരണത്തിൽ നിന്ന് മികച്ച പ്രൊഫൈൽ ചിത്രം തിരഞ്ഞെടുക്കുക",
     },
     {
       icon: Frame,
-      title: "Add Frame",
-      description: "We'll automatically add the campaign frame to your photo",
+      title: "ഫ്രെയിം ചേർക്കുക",
+      description: "നിങ്ങളുടെ ഫോട്ടോയിൽ ഞങ്ങൾ യാന്ത്രികമായി പ്രചാരണ ഫ്രെയിം ചേർക്കും",
     },
     {
       icon: Share2,
-      title: "Share & Support",
-      description: "Download and share on WhatsApp, or use as your profile picture",
+      title: "പങ്കിടുകയും പിന്തുണയ്ക്കുകയും ചെയ്യുക",
+      description: "ഡൗൺലോഡ് ചെയ്ത് വാട്ട്‌സ്ആപ്പിൽ പങ്കിടുക, അല്ലെങ്കിൽ പ്രൊഫൈൽ ചിത്രമായി ഉപയോഗിക്കുക",
     },
   ];
 
@@ -24,9 +24,9 @@ export const HowItWorks = () => {
     <section className="py-20 px-4">
       <div className="container mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">How It Works</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">എങ്ങനെ പ്രവർത്തിക്കുന്നു</h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Join thousands of supporters in just three simple steps
+            മൂന്ന് ലളിതമായ ഘട്ടങ്ങളിൽ ആയിരക്കണക്കിന് പിന്തുണക്കാരോട് ചേരുക
           </p>
         </div>
 
@@ -39,7 +39,7 @@ export const HowItWorks = () => {
                   <Icon className="h-8 w-8 text-primary" />
                 </div>
                 <div className="text-xl font-bold mb-2 text-accent">
-                  Step {index + 1}
+                  ഘട്ടം {index + 1}
                 </div>
                 <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
                 <p className="text-muted-foreground">{step.description}</p>

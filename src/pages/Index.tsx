@@ -42,7 +42,7 @@ const Index = () => {
       
       <footer className="bg-card border-t py-8 px-4">
         <div className="container mx-auto text-center text-muted-foreground">
-          <p>© 2024 Campaign. Together we make a difference.</p>
+          <p>© 2024 പ്രചാരണം. ഒരുമിച്ച് നമുക്ക് മാറ്റമുണ്ടാക്കാം.</p>
         </div>
       </footer>
     </div>

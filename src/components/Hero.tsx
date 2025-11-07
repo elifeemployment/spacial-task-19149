@@ -17,13 +17,13 @@ export const Hero = ({ onGetStarted }: HeroProps) => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8 text-center lg:text-left">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground leading-tight">
-              Join the Campaign
-              <span className="block text-accent mt-2">Show Your Support</span>
+              പ്രചാരണത്തിൽ ചേരൂ
+              <span className="block text-accent mt-2">നിങ്ങളുടെ പിന്തുണ കാണിക്കൂ</span>
             </h1>
             
             <p className="text-lg md:text-xl text-primary-foreground/90 max-w-2xl mx-auto lg:mx-0">
-              Upload your photo, add our campaign frame, and share your support with the world. 
-              Together we can make a difference!
+              നിങ്ങളുടെ ഫോട്ടോ അപ്‌ലോഡ് ചെയ്യുക, ഞങ്ങളുടെ പ്രചാരണ ഫ്രെയിം ചേർക്കുക, ലോകവുമായി നിങ്ങളുടെ പിന്തുണ പങ്കിടുക.
+              ഒരുമിച്ച് നമുക്ക് മാറ്റമുണ്ടാക്കാം!
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
@@ -33,7 +33,7 @@ export const Hero = ({ onGetStarted }: HeroProps) => {
                 onClick={onGetStarted}
                 className="text-base"
               >
-                Get Started
+                ആരംഭിക്കുക
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               
@@ -42,19 +42,19 @@ export const Hero = ({ onGetStarted }: HeroProps) => {
                 variant="secondary"
                 className="text-base bg-primary-foreground/10 text-primary-foreground border-primary-foreground/20 hover:bg-primary-foreground/20"
               >
-                Learn More
+                കൂടുതൽ അറിയുക
               </Button>
             </div>
             
             <div className="flex items-center gap-8 justify-center lg:justify-start text-primary-foreground/80">
               <div>
                 <div className="text-3xl font-bold">10K+</div>
-                <div className="text-sm">Supporters</div>
+                <div className="text-sm">പിന്തുണക്കാർ</div>
               </div>
               <div className="h-12 w-px bg-primary-foreground/20" />
               <div>
                 <div className="text-3xl font-bold">50K+</div>
-                <div className="text-sm">Photos Shared</div>
+                <div className="text-sm">ഫോട്ടോകൾ പങ്കിട്ടു</div>
               </div>
             </div>
           </div>
