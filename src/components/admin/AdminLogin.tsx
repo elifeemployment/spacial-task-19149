@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 
 export function AdminLogin() {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -15,6 +15,9 @@ export function AdminLogin() {
     setLoading(true);
 
     try {
+      // Convert username to email format for Supabase authentication
+      const email = `${username}@admin.local`;
+      
       const { error } = await supabase.auth.signInWithPassword({
         email,
         password,
@@ -41,15 +44,15 @@ export function AdminLogin() {
         <form onSubmit={handleLogin} className="mt-8 space-y-6">
           <div className="space-y-4">
             <div>
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="username">Username</Label>
               <Input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                id="username"
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 required
                 className="mt-1"
-                placeholder="admin@example.com"
+                placeholder="eva"
               />
             </div>
 
